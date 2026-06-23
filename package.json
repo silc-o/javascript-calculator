@@ -1,0 +1,25 @@
+{
+  "name": "javascript-calculator",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/silc-o/javascript-calculator#readme",
+  "bugs": {
+    "url": "https://github.com/silc-o/javascript-calculator/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/silc-o/javascript-calculator.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.5.0",
+    "globals": "^17.6.0"
+  }
+}
