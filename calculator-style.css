@@ -46,6 +46,7 @@ body {
   width: 60px;
   margin: 4px;
   border-radius: 5%;
+  cursor: pointer;
 }
 
 .btn.equal {
