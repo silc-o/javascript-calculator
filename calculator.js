@@ -1,6 +1,8 @@
 // TODO: fix when clicking number instead of operator when the first equate is done. It does not reset the calculator nor does the firstEquation becomes the new firstNumValue
 
 const buttonsContainer = document.querySelector("#calculator-buttons");
+const calculatorDisplay = document.querySelector("#calculator-display");
+
 
 // basic calculator functions
 function add(firstNum, secondNum) {
@@ -22,6 +24,7 @@ function divide(firstNum, secondNum) {
 let firstNum = null;
 let operator = null;
 let secondNum = null;
+let finalResult = null;
 
 let operatorChoices = {
   addition: "+",
@@ -56,16 +59,73 @@ buttonsContainer.addEventListener('click', (event) => {
   clickButton(clickedValue);
 })
 
+function displayValue(value) {
+  const div = document.createElement("div");
+  div.classList.add("value");
+  div.textContent = value;
+  return div;
+}
+
+function clearDisplay() {
+  const values = calculatorDisplay.querySelectorAll('.value');
+  values.forEach((value) => {
+    value.remove();
+  });
+}
+
+function resetParameters() {
+  finalResult = null;
+  firstNum = null;
+  operator = null;
+  secondNum = null;
+}
 function clickButton(value) {
+
+  if (finalResult != null) {
+    clearDisplay();
+    resetParameters();
+  }
+
   // if = is clicked, equate
   if (value === "=") {
-    console.log(operate(firstNum, operator, secondNum))
+    finalResult = String(operate(firstNum, operator, secondNum));
+    clearDisplay();
+    calculatorDisplay.appendChild(displayValue(finalResult));
+    console.log(finalResult)
   } else if (value === operatorChoices && firstNum === null) { // if empty, cant choose operator first
     alert("Enter a number first");
   } else if (operatorChoicesArray.includes(value) && operator === null) { // gets the operator
+    calculatorDisplay.appendChild(displayValue(value));
     operator = value;
-    console.log(operatorChoices);
+    console.log(operator);
+  } else if (value === "C" || value === "AC") {
+    if (value === "AC") {
+      clearDisplay();
+      resetParameters();
+    } else {
+      const lastValueDiv = calculatorDisplay.lastElementChild;
+      const lastValueContent = lastValueDiv.textContent.trim();
+      if (operatorChoicesArray.includes(lastValueContent)) {
+        lastValueDiv.remove();
+        operator = null;
+      } else if (operator === null) { // removes firstNum
+        if (firstNum.length === 1) {
+          lastValueDiv.remove();
+          firstNum = null;
+        } else {
+          lastValueDiv.remove();
+        }
+      } else if (operator != null) {
+        if (secondNum.length === 1) {
+          lastValueDiv.remove();
+          secondNum = null;
+        } else {
+          lastValueDiv.remove();
+        }
+      }
+    }
   } else {
+    calculatorDisplay.appendChild(displayValue(value));
     // gets the first pair of numbers
     if (firstNum === null) {
       firstNum = value;
@@ -87,8 +147,13 @@ function clickButton(value) {
     // if a second operator is called, calculate the first two pair of numbers first 
     if (operatorChoicesArray.includes(value) && secondNum != null) {
       let newFirstNum = operate(firstNum, operator, secondNum);
-      firstNum = newFirstNum;
+      firstNum = String(newFirstNum);
       operator = value;
+      secondNum = null;
+
+      clearDisplay();
+      calculatorDisplay.appendChild(displayValue(firstNum));
+      calculatorDisplay.appendChild(displayValue(operator));
       console.log(firstNum);
     }
   }
