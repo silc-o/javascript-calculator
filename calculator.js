@@ -1,5 +1,3 @@
-// TODO: fix when clicking number instead of operator when the first equate is done. It does not reset the calculator nor does the firstEquation becomes the new firstNumValue
-
 const buttonsContainer = document.querySelector("#calculator-buttons");
 const calculatorDisplay = document.querySelector("#calculator-display");
 
