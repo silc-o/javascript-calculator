@@ -30,7 +30,7 @@ body {
 
 #calculator-display {
   display: flex;
-  background-color: lightblue;
+  background-color: black;
   margin: 30px auto 20px;
   min-height: 100px;
   padding: 20px;
@@ -40,15 +40,26 @@ body {
   width: 280px;
 }
 
+.value {
+  color: white;
+  font-size: 30px;
+}
+
 .btn {
-  background-color: red;
+  background-color: black;
   height: 50px;
   width: 60px;
   margin: 4px;
   border-radius: 5%;
   cursor: pointer;
+  color: white;
+}
+
+.btn.nonInt {
+  background-color: orange;
 }
 
 .btn.equal {
   width: 130px;
+  background-color: orangered;
 }
